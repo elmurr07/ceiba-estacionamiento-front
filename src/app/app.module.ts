@@ -6,11 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RegistrarVehiculoComponent } from './components/registrarVehiculo/registrarVehiculo.component';
 import { ForFilterPipe } from './pipes/forFilter.pipe';
+import { AlertComponent } from './components/alert/alert.component';
+import { TotalPagoComponent } from './components/totalPago/totalPago.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-	RegistrarVehiculoComponent,
+    RegistrarVehiculoComponent,
+    TotalPagoComponent,
+    AlertComponent,
     ForFilterPipe
   ],
   imports: [
@@ -19,6 +23,6 @@ import { ForFilterPipe } from './pipes/forFilter.pipe';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent,RegistrarVehiculoComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

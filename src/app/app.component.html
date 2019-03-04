@@ -7,12 +7,14 @@
 			</div>
 			<div class="col row">
 				<div class="col">
-					<button class="btn btn-success" title="Registrar Moto" (click)="registrarIngreso('MOTO')">
+					<button class="btn btn-success" title="Registrar Moto" [disabled]="numeroMotos >= 10"
+						(click)="registrarIngreso('MOTO')">
 						<i class="fa fa-motorcycle fa-5x"></i>
 					</button>
 				</div>
 				<div class="col">
-					<button class="btn btn-success" title="Registrar Carro" (click)="registrarIngreso('CARRO')">
+					<button class="btn btn-success" title="Registrar Carro" [disabled]="numeroCarros >= 20"
+						(click)="registrarIngreso('CARRO')">
 						<i class="fa fa-car fa-5x"></i>
 					</button>
 				</div>
@@ -53,3 +55,4 @@
 	</table>
 </div>
 <registrar-vehiculo></registrar-vehiculo>
+<total-pago></total-pago>

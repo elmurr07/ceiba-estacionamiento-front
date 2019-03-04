@@ -1,21 +1,39 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RegistroService } from '../../services/registro.service';
-import { SharedMap } from '../../services/sharedMap.service';
-import { Constants } from '../../utils/constants.util';
+import { NgForm } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { Vehiculo } from '../../models/vehiculo.model';
+
+import * as $AB from 'jquery';
+import * as bootstrap from "bootstrap";
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
     selector: 'registrar-vehiculo',
     templateUrl: './registrarVehiculo.component.html',
     styleUrls: ['./registrarVehiculo.component.css']
 })
-export class RegistrarVehiculoComponent implements OnInit {
+export class RegistrarVehiculoComponent {
+    vehiculo: Vehiculo = new Vehiculo(0, null, null, null);
+    @ViewChild(AlertComponent) alertComponent: AlertComponent;
 
-    tipoVehiculo: String;
+    constructor(private registroService: RegistroService) { }
 
-    constructor(private registroService: RegistroService, private sharedMap: SharedMap) { }
+    registrarIngreso() {
+        this.registroService.registrarIngreso(this.vehiculo).subscribe(
+            data => {
+                $('#modalRegistroIngreso').modal('hide');
+                this.alertComponent.showAlert('Vehiculo registrado exitosamente');
+            });
+    }
 
-    ngOnInit(): void {
-        this.tipoVehiculo = this.sharedMap.get(Constants.MAPA_TIPO_VEHICULO);
+    openModal(tipo: string) {
+        this.reiniciarVehiculo(tipo);
+        $('#modalRegistroIngreso').modal({ backdrop: 'static', keyboard: false });
+    }
+
+    reiniciarVehiculo(tipo: string) {
+        this.vehiculo = new Vehiculo(0, tipo, null, null);
     }
 }
