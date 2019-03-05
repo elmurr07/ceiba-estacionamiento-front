@@ -1,5 +1,7 @@
 import { AppPage } from './app.po';
 import { browser, logging, element, by } from 'protractor';
+import { ConstantsE2E } from './constants.e2e';
+import { Constants } from '../../src/app/utils/constants.util';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -10,51 +12,57 @@ describe('workspace-project App', () => {
 
   it('should display TRM value', () => {
     page.navigateTo();
-    expect(element(by.id('trmHoy')).getText()).not.toBe('');
+    expect(element(by.id(ConstantsE2E.ID_LABEL_TRM_HOY)).getText()).not.toBe('');
   });
 
   it('should insert motocycle and list on the table', () => {
     page.navigateTo();
-    element(by.id('btnRegistrarMoto')).click();
-    element(by.id('placa')).sendKeys('RFG534');
-    element(by.id('cilindraje')).sendKeys(125);
-    element(by.id('btnRegistrar')).click();
-    //TODO validar que se muestre la info en la tabla
-    //TODO ajustar refresco
-    page.navigateTo();
-    element(by.id('inputBuscar')).sendKeys('RFG534');
-    element(by.className('btnSalida')).click();
+    //registrar ingreso de moto
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR_MOTO)).click();
+    expect(element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_TIPO)).getAttribute("value")).toEqual(Constants.TIPO_VEHICULO_MOTO);
+    element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_MOTO_1_TEST);
+    element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_CILINDRAJE)).sendKeys(ConstantsE2E.CILINDRAJE_MOTO_TEST);
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
+    //validar valores en la tabla
+    element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_MOTO_1_TEST);
+    expect(element(by.className(ConstantsE2E.CLASS_LABEL_TIPO_TABLA)).getText()).toEqual(Constants.TIPO_VEHICULO_MOTO);
+    expect(element(by.className(ConstantsE2E.CLASS_LABEL_PLACA_TABLA)).getText()).toEqual(ConstantsE2E.PLACA_MOTO_1_TEST);
+    expect(element(by.className(ConstantsE2E.CLASS_LABEL_FECHA_INICIO_TABLA)).getText()).not.toBe('');
+    //registrar salida
+    element(by.className(ConstantsE2E.CLASS_BOTON_REGISTRAR_SALIDA)).click();
   });
 
   it('should insert car and list on the table', () => {
     page.navigateTo();
-    element(by.id('btnRegistrarCarro')).click();
-    element(by.id('placa')).sendKeys('MNJ721');
-    expect(element(by.id('cilindraje')).isPresent()).toBe(false);
-    element(by.id('btnRegistrar')).click();
-    //TODO validar que se muestre la info en la tabla
-    //TODO ajustar refresco
-    page.navigateTo();
-    element(by.id('inputBuscar')).sendKeys('MNJ721');
-    element(by.className('btnSalida')).click();
+    //registrar ingreso de carro
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR_CARRO)).click();
+    expect(element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_TIPO)).getAttribute("value")).toEqual(Constants.TIPO_VEHICULO_CARRO);
+    element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_CARRO_1_TEST);
+    expect(element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_CILINDRAJE)).isPresent()).toBe(false);
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
+    //validar valores en la tabla
+    element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_CARRO_1_TEST);
+    expect(element(by.className(ConstantsE2E.CLASS_LABEL_TIPO_TABLA)).getText()).toEqual(Constants.TIPO_VEHICULO_CARRO);
+    expect(element(by.className(ConstantsE2E.CLASS_LABEL_PLACA_TABLA)).getText()).toEqual(ConstantsE2E.PLACA_CARRO_1_TEST);
+    expect(element(by.className(ConstantsE2E.CLASS_LABEL_FECHA_INICIO_TABLA)).getText()).not.toBe('');
+    //registrar salida
+    element(by.className(ConstantsE2E.CLASS_BOTON_REGISTRAR_SALIDA)).click();
   });
 
   it('should mark exit of vehicule and pay correct value', () => {
     page.navigateTo();
-    //ingresar vehiculo
-    element(by.id('btnRegistrarCarro')).click();
-    element(by.id('placa')).sendKeys('HPY721');
-    element(by.id('btnRegistrar')).click();
-    //salida vehiculo
-    element(by.id('inputBuscar')).sendKeys('HPY721');
-    //TODO validar solo encontrar uno
-    //TODO ajustar refresco
-    page.navigateTo();
-    element(by.className('btnSalida')).click();
-    expect(element(by.id('lblPlacaPago')).getText()).toEqual('HPY721');
-    expect(element(by.id('lblFechaInicioPago')).getText()).not.toBe('');
-    expect(element(by.id('lblFechaFinPago')).getText()).not.toBe('');
-    expect(element(by.id('lblValorPagar')).getText()).toEqual('$1,000.00');
+    //ingresar ingreso vehiculo
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR_CARRO)).click();
+    element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_CARRO_2_TEST);
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
+    //registrar salida
+    element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_CARRO_2_TEST);
+    element(by.className(ConstantsE2E.CLASS_BOTON_REGISTRAR_SALIDA)).click();
+    //validar datos de pago
+    expect(element(by.id(ConstantsE2E.ID_LABEL_PLACA_PAGO)).getText()).toEqual(ConstantsE2E.PLACA_CARRO_2_TEST);
+    expect(element(by.id(ConstantsE2E.ID_LABEL_FECHA_INICIO_PAGO)).getText()).not.toBe('');
+    expect(element(by.id(ConstantsE2E.ID_LABEL_FECHA_FIN_PAGO)).getText()).not.toBe('');
+    expect(element(by.id(ConstantsE2E.ID_LABEL_VALOR_PAGO)).getText()).toEqual(ConstantsE2E.VALOR_PAGAR_CARRO_TEST);
   });
 
   afterEach(async () => {

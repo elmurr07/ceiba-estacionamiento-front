@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-8 text-center">
 				<h1>Dolar TRM:</h1>
-				<h3 id="trmHoy">{{trm | currency}}</h3>
+				<h3 id="lblTrmHoy">{{trm | currency}}</h3>
 			</div>
 			<div class="col row">
 				<div class="col">
@@ -13,8 +13,8 @@
 					</button>
 				</div>
 				<div class="col">
-					<button id="btnRegistrarCarro" class="btn btn-success" title="Registrar Carro" [disabled]="numeroCarros >= 20"
-						(click)="registrarIngreso('CARRO')">
+					<button id="btnRegistrarCarro" class="btn btn-success" title="Registrar Carro"
+						[disabled]="numeroCarros >= 20" (click)="registrarIngreso('CARRO')">
 						<i class="fa fa-car fa-5x"></i>
 					</button>
 				</div>
@@ -43,9 +43,9 @@
 			<th>Acci&oacute;n</th>
 		</tr>
 		<tr *ngFor="let registro of registros | forFilter: textFiltro">
-			<td>{{registro.vehiculo.tipo}}</td>
-			<td>{{registro.vehiculo.placa}}</td>
-			<td>{{registro.inicio | date : 'dd/MM/yyyy HH:mm'}}</td>
+			<td><span class="lblTipoTabla">{{registro.vehiculo.tipo}}</span></td>
+			<td><span class="lblPlacaTabla">{{registro.vehiculo.placa}}</span></td>
+			<td><span class="lblFechaInicioTabla">{{registro.inicio | date : 'dd/MM/yyyy HH:mm'}}</span></td>
 			<td class="text-center">
 				<button type="button" class="btnSalida btn btn-info" (click)="registrarSalida(registro.id)">
 					Registrar Salida
@@ -54,5 +54,5 @@
 		</tr>
 	</table>
 </div>
-<registrar-vehiculo></registrar-vehiculo>
+<registrar-vehiculo [refrescar]="listarVehiculosFunc"></registrar-vehiculo>
 <total-pago></total-pago>

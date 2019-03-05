@@ -3,6 +3,7 @@ import { TrmService } from './services/trm.service';
 import { RegistroService } from './services/registro.service';
 import { RegistrarVehiculoComponent } from './components/registrarVehiculo/registrarVehiculo.component';
 import { TotalPagoComponent } from './components/totalPago/totalPago.component';
+import { Constants } from './utils/constants.util';
 
 @Component({
     selector: 'app-root',
@@ -31,6 +32,10 @@ export class AppComponent implements OnInit {
         });
     }
 
+    get listarVehiculosFunc() {
+        return this.listarVehiculos.bind(this);
+    }
+
     listarVehiculos() {
         this.registroService.listar().subscribe(data => {
             this.registros = data;
@@ -42,7 +47,7 @@ export class AppComponent implements OnInit {
         this.numeroCarros = 0;
         this.numeroMotos = 0;
         vehiculos.forEach((element) => {
-            if (element.vehiculo.tipo == 'CARRO') {
+            if (element.vehiculo.tipo == Constants.TIPO_VEHICULO_CARRO) {
                 this.numeroCarros++;
             } else {
                 this.numeroMotos++;
