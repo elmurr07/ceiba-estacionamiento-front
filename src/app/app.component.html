@@ -3,17 +3,17 @@
 		<div class="row">
 			<div class="col-8 text-center">
 				<h1>Dolar TRM:</h1>
-				<h3>{{trm | currency}}</h3>
+				<h3 id="trmHoy">{{trm | currency}}</h3>
 			</div>
 			<div class="col row">
 				<div class="col">
-					<button class="btn btn-success" title="Registrar Moto" [disabled]="numeroMotos >= 10"
-						(click)="registrarIngreso('MOTO')">
+					<button id="btnRegistrarMoto" class="btn btn-success" title="Registrar Moto"
+						[disabled]="numeroMotos >= 10" (click)="registrarIngreso('MOTO')">
 						<i class="fa fa-motorcycle fa-5x"></i>
 					</button>
 				</div>
 				<div class="col">
-					<button class="btn btn-success" title="Registrar Carro" [disabled]="numeroCarros >= 20"
+					<button id="btnRegistrarCarro" class="btn btn-success" title="Registrar Carro" [disabled]="numeroCarros >= 20"
 						(click)="registrarIngreso('CARRO')">
 						<i class="fa fa-car fa-5x"></i>
 					</button>
@@ -26,7 +26,7 @@
 	<div class="row form-group d-flex justify-content-center">
 		<div class="col-8">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="textFiltro">
+				<input type="text" id="inputBuscar" class="form-control" placeholder="Buscar" [(ngModel)]="textFiltro">
 				<div class="input-group-append">
 					<span class="input-group-text">
 						<i class="fa fa-search"></i>
@@ -47,7 +47,7 @@
 			<td>{{registro.vehiculo.placa}}</td>
 			<td>{{registro.inicio | date : 'dd/MM/yyyy HH:mm'}}</td>
 			<td class="text-center">
-				<button type="button" class="btn btn-info" (click)="registrarSalida(registro.id)">
+				<button type="button" class="btnSalida btn btn-info" (click)="registrarSalida(registro.id)">
 					Registrar Salida
 				</button>
 			</td>

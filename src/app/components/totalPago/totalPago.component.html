@@ -9,12 +9,12 @@
                 </button>
             </div>
             <div class="modal-body" *ngIf="pago">
-                <p>Vehiculo con Placa <b>{{pago.placa}}</b></p>
-                <p>Hora Inicio <b>{{pago.fechaInicio | date:'dd/MM/yyyy HH:mm'}}</b></p>
-                <p>Hora Fin <b>{{pago.fechaFin | date:'dd/MM/yyyy HH:mm'}}</b></p>
+                <p>Vehiculo con Placa <b id="lblPlacaPago">{{pago.placa}}</b></p>
+                <p>Hora Inicio <b id="lblFechaInicioPago">{{pago.fechaInicio | date:'dd/MM/yyyy HH:mm'}}</b></p>
+                <p>Hora Fin <b id="lblFechaFinPago">{{pago.fechaFin | date:'dd/MM/yyyy HH:mm'}}</b></p>
                 <div style="text-align: center">
                     <p>pagar:</p>
-                    <h3>{{pago.valor | currency}}</h3>
+                    <h3 id="lblValorPagar">{{pago.valor | currency}}</h3>
                 </div>
             </div>
             <div class="modal-footer">
