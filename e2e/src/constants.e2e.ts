@@ -6,6 +6,7 @@ export class ConstantsE2E {
     public static ID_INPUT_REGISTRO_PLACA = 'placa';
     public static ID_INPUT_REGISTRO_CILINDRAJE = 'cilindraje';
     public static ID_BOTON_REGISTRAR = 'btnRegistrar';
+    public static ID_BOTON_CANCELAR = 'btnCancelar';
     public static ID_INPUT_BUSCAR = 'inputBuscar';
     public static CLASS_BOTON_REGISTRAR_SALIDA = 'btnSalida';
     public static ID_LABEL_PLACA_PAGO = 'lblPlacaPago';
@@ -15,6 +16,8 @@ export class ConstantsE2E {
     public static CLASS_LABEL_TIPO_TABLA = 'lblTipoTabla';
     public static CLASS_LABEL_PLACA_TABLA = 'lblPlacaTabla';
     public static CLASS_LABEL_FECHA_INICIO_TABLA = 'lblFechaInicioTabla';
+    public static ID_LABEL_MENSAJE_ALERTA = 'lblContenidoAlerta';
+    public static ID_LABEL_MENSAJE_ERROR = 'lblContenidoError';
 
     public static PLACA_MOTO_1_TEST = 'RFG534';
     public static CILINDRAJE_MOTO_TEST = 125;

@@ -10,12 +10,12 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display TRM value', () => {
+  it('should display TRM value valid', () => {
     page.navigateTo();
     expect(element(by.id(ConstantsE2E.ID_LABEL_TRM_HOY)).getText()).not.toBe('');
   });
 
-  it('should insert motocycle and list on the table', () => {
+  it('should insert motorcycle and list in the table', () => {
     page.navigateTo();
     //registrar ingreso de moto
     element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR_MOTO)).click();
@@ -23,6 +23,8 @@ describe('workspace-project App', () => {
     element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_MOTO_1_TEST);
     element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_CILINDRAJE)).sendKeys(ConstantsE2E.CILINDRAJE_MOTO_TEST);
     element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
+    //validar mensaje de alerta
+    // expect(element(by.id(ConstantsE2E.ID_LABEL_MENSAJE_ALERTA)).getText()).not.toBe('');
     //validar valores en la tabla
     element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_MOTO_1_TEST);
     expect(element(by.className(ConstantsE2E.CLASS_LABEL_TIPO_TABLA)).getText()).toEqual(Constants.TIPO_VEHICULO_MOTO);
@@ -32,7 +34,7 @@ describe('workspace-project App', () => {
     element(by.className(ConstantsE2E.CLASS_BOTON_REGISTRAR_SALIDA)).click();
   });
 
-  it('should insert car and list on the table', () => {
+  it('should insert car and list in the table', () => {
     page.navigateTo();
     //registrar ingreso de carro
     element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR_CARRO)).click();
@@ -40,6 +42,8 @@ describe('workspace-project App', () => {
     element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_CARRO_1_TEST);
     expect(element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_CILINDRAJE)).isPresent()).toBe(false);
     element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
+    //validar mensaje de alerta
+    // expect(element(by.id(ConstantsE2E.ID_LABEL_MENSAJE_ALERTA)).getText()).not.toEqual('');
     //validar valores en la tabla
     element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_CARRO_1_TEST);
     expect(element(by.className(ConstantsE2E.CLASS_LABEL_TIPO_TABLA)).getText()).toEqual(Constants.TIPO_VEHICULO_CARRO);
@@ -65,11 +69,27 @@ describe('workspace-project App', () => {
     expect(element(by.id(ConstantsE2E.ID_LABEL_VALOR_PAGO)).getText()).toEqual(ConstantsE2E.VALOR_PAGAR_CARRO_TEST);
   });
 
-  afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
-    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    expect(logs).not.toContain(jasmine.objectContaining({
-      level: logging.Level.SEVERE,
-    } as logging.Entry));
+  it('should not permit insert one vehicule two times', () => {
+    page.navigateTo();
+    //ingresar vehiculos
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR_CARRO)).click();
+    element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_CARRO_2_TEST);
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR_CARRO)).click();
+    element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_CARRO_2_TEST);
+    element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
+    expect(element(by.id(ConstantsE2E.ID_LABEL_MENSAJE_ERROR)).getText()).not.toBe('');
+    //registrar salida
+    element(by.id(ConstantsE2E.ID_BOTON_CANCELAR)).click();
+    element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_CARRO_2_TEST);
+    element(by.className(ConstantsE2E.CLASS_BOTON_REGISTRAR_SALIDA)).click();
   });
+
+  // afterEach(async () => {
+  //   // Assert that there are no errors emitted from the browser
+  //   const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+  //   expect(logs).not.toContain(jasmine.objectContaining({
+  //     level: logging.Level.SEVERE,
+  //   } as logging.Entry));
+  // });
 });

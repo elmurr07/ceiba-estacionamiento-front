@@ -7,5 +7,6 @@ export class Constants {
     public static ID_MODAL_REGISTRAR_INGRESO = 'modalRegistroIngreso';
     public static ID_MODAL_PAGO_TOTAL = 'modalPagoTotal';
 
-    public static MENSAJE_REGISTRO_CON_EXITO = 'Vehiculo registrado exitosamente';
+    public static MENSAJE_REGISTRO_CON_EXITO = 'Vehículo registrado exitosamente';
+    public static MENSAJE_ERROR_DESCONOCIDO = 'Ocurrio un problema registrando vehiculo';
 }
