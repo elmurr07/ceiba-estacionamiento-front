@@ -1,5 +1,5 @@
 import { AppPage } from './app.po';
-import { browser, logging, element, by } from 'protractor';
+import { browser, logging, element, by, protractor } from 'protractor';
 import { ConstantsE2E } from './constants.e2e';
 import { Constants } from '../../src/app/utils/constants.util';
 
@@ -23,8 +23,6 @@ describe('workspace-project App', () => {
     element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_MOTO_1_TEST);
     element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_CILINDRAJE)).sendKeys(ConstantsE2E.CILINDRAJE_MOTO_TEST);
     element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
-    //validar mensaje de alerta
-    // expect(element(by.id(ConstantsE2E.ID_LABEL_MENSAJE_ALERTA)).getText()).not.toBe('');
     //validar valores en la tabla
     element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_MOTO_1_TEST);
     expect(element(by.className(ConstantsE2E.CLASS_LABEL_TIPO_TABLA)).getText()).toEqual(Constants.TIPO_VEHICULO_MOTO);
@@ -42,8 +40,6 @@ describe('workspace-project App', () => {
     element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_PLACA)).sendKeys(ConstantsE2E.PLACA_CARRO_1_TEST);
     expect(element(by.id(ConstantsE2E.ID_INPUT_REGISTRO_CILINDRAJE)).isPresent()).toBe(false);
     element(by.id(ConstantsE2E.ID_BOTON_REGISTRAR)).click();
-    //validar mensaje de alerta
-    // expect(element(by.id(ConstantsE2E.ID_LABEL_MENSAJE_ALERTA)).getText()).not.toEqual('');
     //validar valores en la tabla
     element(by.id(ConstantsE2E.ID_INPUT_BUSCAR)).sendKeys(ConstantsE2E.PLACA_CARRO_1_TEST);
     expect(element(by.className(ConstantsE2E.CLASS_LABEL_TIPO_TABLA)).getText()).toEqual(Constants.TIPO_VEHICULO_CARRO);

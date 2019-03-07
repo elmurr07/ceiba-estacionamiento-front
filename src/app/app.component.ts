@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     registros: Array<any>;
     numeroMotos: number;
     numeroCarros: number;
+    textFiltro:string;
 
     constructor(private trmService: TrmService,
         private registroService: RegistroService) { }
