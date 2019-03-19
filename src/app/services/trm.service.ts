@@ -9,6 +9,6 @@ export class TrmService {
     }
 
     getTRM(): Observable<any> {
-        return this.http.get( '//localhost:8080/trm/obtenerActual' );
+        return this.http.get( '//localhost:8080/trm' );
     }
 }

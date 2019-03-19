@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, Input } from '@angular/core';
-import { RegistroService } from '../../services/registro.service';
+import { VehiculoService } from '../../services/vehiculo.service';
 import { NgForm } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Vehiculo } from '../../models/vehiculo.model';
@@ -21,11 +21,11 @@ export class RegistrarVehiculoComponent {
     @ViewChild(AlertComponent) alertComponent: AlertComponent;
     @Input() refrescar: Function;
 
-    constructor(private registroService: RegistroService) { }
+    constructor(private vehiculoService: VehiculoService) { }
 
     registrarIngreso() {
         this.vehiculo.placa = this.vehiculo.placa.toUpperCase();
-        this.registroService.registrarIngreso(this.vehiculo).subscribe(
+        this.vehiculoService.registrarIngreso(this.vehiculo).subscribe(
             data => {
                 $('#' + Constants.ID_MODAL_REGISTRAR_INGRESO).modal('hide');
                 this.alertComponent.showAlert(Constants.MENSAJE_REGISTRO_CON_EXITO);
